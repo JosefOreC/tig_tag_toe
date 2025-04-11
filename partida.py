@@ -28,7 +28,15 @@ class Partida:
             return self.jugadores.get(self.turnos_jugador_iniciante)
         else: return self.jugadores.get(self.turnos_jugador_continuador)
 
+    def get_name_jugador_turn(self):
+        return self.is_turn_of().name
     def turno(self):
-        pass
+        jugador = self.is_turn_of()
+        jugada = int(input(f"Turno {self.turno_act}| {jugador.name}>"))
+        jugador.jugar(jugada)
+
+
+
+
 
 
