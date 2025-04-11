@@ -35,6 +35,8 @@ class Tablero:
 
     def set_box_in_table(self, value, i, j):
         self.tablero[i][j] = value
-        
+
+
+
 if __name__ == '__main__':
     pass

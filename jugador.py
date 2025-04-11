@@ -19,3 +19,5 @@ class Jugador:
                 self.tablero.set_box_in_table(self.simbolo, I, J)
                 return
 
+
+

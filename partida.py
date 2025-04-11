@@ -29,4 +29,6 @@ class Partida:
         else: return self.jugadores.get(self.turnos_jugador_continuador)
 
     def turno(self):
+        pass
+
 
