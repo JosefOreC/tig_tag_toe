@@ -1,7 +1,9 @@
+
+
 class Tablero:
 
     def __init__(self):
-        self.espacios_disponibles = [i for i in range(9)]
+        self.espacios_disponibles = [i+1 for i in range(9)]
         self.tablero = [[1,2,3],[4,5,6],[7,8,9]]
 
     def get_espacios_disponibles(self):
@@ -33,10 +35,16 @@ class Tablero:
         line_table('|', " ", None)
         line_table('+', '-', None)
 
+    def delete_espacio_disponible(self, espacio):
+        try:
+            self.espacios_disponibles.remove(espacio)
+        except:
+            return "Exception: Can't find the space."
+
     def set_box_in_table(self, value, i, j):
         self.tablero[i][j] = value
 
 
 
 if __name__ == '__main__':
-    pass
+    Tablero().display_tablero()
