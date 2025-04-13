@@ -16,6 +16,7 @@ class Partida:
         self.turnos_jugador_continuador = [i+1 for i in range(9) if i%2!=0]
         self.turno_act = 1
         self.estado = True
+        self.status = {'now': 'en juego'}
 
     def definir_jugador_inicio(self):
         #jugador1: 0, jugador2: 1
@@ -26,7 +27,10 @@ class Partida:
         self.jugadores = {"jugador_iniciante": self.jugador2, 'jugador_continuador': self.jugador1}
 
     def is_turn_of(self):
-        if self.turno_act in self.turnos_jugador_iniciante:
+        return self.is_turn_of_when(self.turno_act)
+
+    def is_turn_of_when(self, turno):
+        if turno in self.turnos_jugador_iniciante:
             return self.jugadores.get("jugador_iniciante")
         return self.jugadores.get('jugador_continuador')
 
@@ -44,7 +48,8 @@ class Partida:
 
             self.tablero.delete_espacio_disponible(jugada)
             self.turno_act += 1
-            self.estado_partida()
+            if (win:=self.estado_partida()) != None:
+                self.status = {'now': 'Partida terminada', 'winner name': win.name, 'loser name': (loser:=self.is_turn_of_when(self.turno_act-2)).name , 'winner': win, 'loser': loser, 'end': 'A player won'}
             return
 
         print(response)
@@ -93,7 +98,6 @@ class Partida:
             self.tablero.display_tablero()
             self.turno()
         self.tablero.display_tablero()
-
         print("La partida ha finalizado.")
 
 
@@ -111,17 +115,18 @@ class Partida:
         if is_player1_win:
             self.estado = False
             print(f"{self.jugador1.name} ha ganado!")
-            return
+            return self.jugador1
 
         is_player2_win = self.analizar_tablero(self.jugador2)
 
         if is_player2_win:
             self.estado = False
             print(f"{self.jugador2.name} ha ganado!")
-            return
+            return self.jugador2
 
         if self.turno_act > 9:
             self.estado = False
             print("Han empatado.")
+            self.status = {'now':'Partida terminada', 'end': 'Empate'}
             return
 
