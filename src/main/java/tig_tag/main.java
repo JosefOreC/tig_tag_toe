@@ -13,10 +13,14 @@ public class main {
      * @param args the command line arguments
      */ 
     public static void main(String[] args) {
-        Jugador obj1 = new Jugador("bot",'0', true);
+        Jugador obj1 = new Jugador("bot",'X', true);
         Tablero obj = new Tablero();
         obj1.set_tablero(obj);
-        System.out.println(obj1.hacer_jugada());
+        char jugada = obj1.hacer_jugada();
+        obj1.jugar(jugada);
+        obj.display_tablero();
+        System.out.print(obj1.lista_jugadas.get(0)[0]);
+        System.out.print(obj1.lista_jugadas.get(0)[1]);
     }
     
 }

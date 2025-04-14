@@ -14,7 +14,7 @@ import static java.util.Collections.reverseOrder;
  */
 public class Tablero {
     private String espacios_disponibles="";
-    private char tablero[][] = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
+    private char tablero_box[][] = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
        
     public Tablero(){
         for(int i=1; i<10; i++){
@@ -45,14 +45,18 @@ public class Tablero {
         for(int j =0; j<3; j++){
             line_table('+', '-', null);
             line_table('|', ' ', null);
-            line_table('|', ' ', this.tablero[j]);
+            line_table('|', ' ', this.tablero_box[j]);
             line_table('|', ' ', null);
         }
         line_table('+', '-', null);
     }
     
     public void set_box_in_table(char value, int i, int j){
-        this.tablero[i][j] = value;
+        this.tablero_box[i][j] = value;
+    }
+    
+    public char[][] get_tablero_box(){
+        return this.tablero_box;
     }
     
     public void delete_espacio_disponible(char value){

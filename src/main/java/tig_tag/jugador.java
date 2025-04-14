@@ -12,7 +12,7 @@ public class Jugador {
     private boolean type_play;
     private Tablero tablero;
     
-    private ArrayList<Integer[]> lista_jugadas=new ArrayList<>();
+    public ArrayList<int[]> lista_jugadas=new ArrayList<>();
 
     public Jugador(String name, char simbolo, boolean type_play) {
         this.name= name;
@@ -24,13 +24,31 @@ public class Jugador {
         this.tablero = tablero;
     }
     
+    private boolean analitic_play(char value){
+        String espacios_disponibles;
+        
+        try{
+            espacios_disponibles = this.tablero.get_espacios_disponibles();
+        }catch (Exception e){
+            System.err.println("Except: Don't exits initial game.");
+            return false;
+        }
+        
+        for(int i=0; espacios_disponibles.length()>i; i++){
+            if (value==(espacios_disponibles.charAt(i))){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public char hacer_jugada(){
         int value;
         char val;
         boolean is_valid_play=false;
-        String espacios_disponibles;
+        
         try{
-            espacios_disponibles = this.tablero.get_espacios_disponibles();
+            this.tablero.get_espacios_disponibles();
         }catch (Exception e){
             System.err.println("Except: Don't exits initial game.");
             return 'e';
@@ -41,29 +59,19 @@ public class Jugador {
                 Random r = new Random();
                 value = r.nextInt(9)+1;
                 val = Integer.toString(value).charAt(0);
-                for(int i=0; espacios_disponibles.length()>i; i++){
-                    if (val==(espacios_disponibles.charAt(i))){
-                        is_valid_play = true;
-                        return val;
-                    }
-                }
+                if(analitic_play(val)) 
+                    return val;
             }
         }
         
         Scanner sc = new Scanner(System.in);
-        while (!is_valid_play){
+        while (is_valid_play){
             try {
                 System.out.print(this.name+">");
                 value = sc.nextInt();
-                
                 val = Integer.toString(value).charAt(0);
-                for(int i=0; espacios_disponibles.length()>i; i++){
-                    if (val==(espacios_disponibles.charAt(i))){
-                        is_valid_play = true;
-                        return val;
-                    }
-                }
-                System.err.println("Except: The play isn't an integer, please, input again.");
+                return val;
+                
             } catch (Exception e) {
                 System.err.println("Except: The play isn't an integer, please, input again.");
             }
@@ -71,4 +79,26 @@ public class Jugador {
         return 'e';
         
     }
+    
+    public void jugar(char jugada){
+        if(!analitic_play(jugada)){
+            System.out.println("Except: The space is not available.");
+            return;
+        }
+        
+        char tablero[][] = this.tablero.get_tablero_box();
+        
+        for(int i=0; i<tablero.length; i++){
+            for(int j=0; tablero.length>j; j++){
+                if(jugada == tablero[i][j]){
+                    this.tablero.set_box_in_table(this.simbolo,i, j);
+                    int jugada_realizada[] = {i,j};
+                    this.lista_jugadas.add(jugada_realizada);
+                }
+            }
+        }
+        
+    }
+    
+    
 }
