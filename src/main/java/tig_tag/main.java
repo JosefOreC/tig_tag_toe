@@ -13,13 +13,10 @@ public class main {
      * @param args the command line arguments
      */ 
     public static void main(String[] args) {
+        Jugador obj1 = new Jugador("bot",'0', true);
         Tablero obj = new Tablero();
-        obj.display_tablero();
-        obj.set_box_in_table('X', 1, 1);
-        obj.display_tablero();
-        System.out.println(obj.get_espacios_disponibles());
-        obj.delete_espacio_disponible('8');
-        System.out.println(obj.get_espacios_disponibles());
+        obj1.set_tablero(obj);
+        System.out.println(obj1.hacer_jugada());
     }
     
 }
