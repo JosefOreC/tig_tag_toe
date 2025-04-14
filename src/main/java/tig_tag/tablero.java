@@ -10,4 +10,5 @@ package tig_tag;
  */
 public class tablero {
     
+    
 }
