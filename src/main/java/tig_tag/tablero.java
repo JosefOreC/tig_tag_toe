@@ -47,4 +47,8 @@ public class Tablero {
         line_table('+', '-', null);
     }
     
+    public void set_box_in_table(char value, int i, int j){
+        this.tablero[i][j] = value;
+    }
+    
 }

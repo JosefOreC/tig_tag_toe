@@ -15,6 +15,8 @@ public class main {
     public static void main(String[] args) {
         Tablero obj = new Tablero();
         obj.display_tablero();
+        obj.set_box_in_table('X', 1, 1);
+        obj.display_tablero();
     }
     
 }
