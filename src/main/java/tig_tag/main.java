@@ -17,6 +17,9 @@ public class main {
         obj.display_tablero();
         obj.set_box_in_table('X', 1, 1);
         obj.display_tablero();
+        System.out.println(obj.get_espacios_disponibles());
+        obj.delete_espacio_disponible('8');
+        System.out.println(obj.get_espacios_disponibles());
     }
     
 }

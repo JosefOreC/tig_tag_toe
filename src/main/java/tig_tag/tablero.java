@@ -4,6 +4,8 @@
  */
 package tig_tag;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import static java.util.Collections.reverseOrder;
 
 /**
@@ -11,14 +13,16 @@ import static java.util.Collections.reverseOrder;
  * @author danie
  */
 public class Tablero {
-    private int espacios_disponibles[] = {1,2,3,4,5,6,7,8,9};
+    private String espacios_disponibles="";
     private char tablero[][] = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
        
     public Tablero(){
-        
+        for(int i=1; i<10; i++){
+            this.espacios_disponibles+=Integer.toString(i);
+        }
     }
     
-    public int[] get_espacios_disponibles(){
+    public String get_espacios_disponibles(){
         return this.espacios_disponibles;
     }
     
@@ -49,6 +53,16 @@ public class Tablero {
     
     public void set_box_in_table(char value, int i, int j){
         this.tablero[i][j] = value;
+    }
+    
+    public void delete_espacio_disponible(char value){
+        String new_espacios_disponibles = "";
+        for(int i=0; i<this.espacios_disponibles.length(); i++){
+            if(this.espacios_disponibles.charAt(i)!=value){
+                new_espacios_disponibles+=this.espacios_disponibles.charAt(i);
+            }
+        }
+        this.espacios_disponibles=new_espacios_disponibles;
     }
     
 }
