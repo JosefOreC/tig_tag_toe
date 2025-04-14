@@ -11,7 +11,7 @@ public class main {
 
     /**
      * @param args the command line arguments
-     */
+     */ 
     public static void main(String[] args) {
         Tablero obj = new Tablero();
         obj.display_tablero();

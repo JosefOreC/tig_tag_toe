@@ -7,7 +7,7 @@ package tig_tag;
 import static java.util.Collections.reverseOrder;
 
 /**
- *
+ * 
  * @author danie
  */
 public class Tablero {
